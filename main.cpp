@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <functional>
+#include <ctime>
 
 #include "Pomocne.h"
 #include "Trening.h"
@@ -73,7 +74,7 @@ void TestTrening()
     t3 = t1;
     cout << "Operator= jednak: " << (t1 == t3) << endl;
 }
-
+/*
 void TestIndividualni()
 {
     cout << "\n===== INDIVIDUALNI TRENING =====\n";
@@ -173,15 +174,15 @@ void TestSportskiCentar()
     dodjela = centar;
     cout << "Operator= centra - broj elemenata: " << dodjela.GetTrenutno() << endl;
 }
-
+*/
 int main()
 {
     srand((unsigned)time(nullptr));
 	
 	// Za testiranje odkomentarisati odgovarajucu metodu
     
-	//TestPomocne();
-    //TestTrening();
+	TestPomocne();
+    TestTrening();
     //TestIndividualni();
     //TestGrupni();
     //TestSportskiCentar();
