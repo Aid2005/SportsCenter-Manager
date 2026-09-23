@@ -74,7 +74,7 @@ void TestTrening()
     t3 = t1;
     cout << "Operator= jednak: " << (t1 == t3) << endl;
 }
-/*
+
 void TestIndividualni()
 {
     cout << "\n===== INDIVIDUALNI TRENING =====\n";
@@ -95,7 +95,7 @@ void TestIndividualni()
 
     i1.Ispis();
 }
-
+/*
 void TestGrupni()
 {
     cout << "\n===== GRUPNI TRENING =====\n";
@@ -183,7 +183,7 @@ int main()
     
 	TestPomocne();
     TestTrening();
-    //TestIndividualni();
+    TestIndividualni();
     //TestGrupni();
     //TestSportskiCentar();
 
