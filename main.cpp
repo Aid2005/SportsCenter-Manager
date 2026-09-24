@@ -95,7 +95,7 @@ void TestIndividualni()
 
     i1.Ispis();
 }
-/*
+
 void TestGrupni()
 {
     cout << "\n===== GRUPNI TRENING =====\n";
@@ -125,7 +125,7 @@ void TestGrupni()
 
     g1.Ispis();
 }
-
+/*
 void TestSportskiCentar()
 {
     cout << "\n===== SPORTSKI CENTAR =====\n";
@@ -184,7 +184,7 @@ int main()
 	TestPomocne();
     TestTrening();
     TestIndividualni();
-    //TestGrupni();
+    TestGrupni();
     //TestSportskiCentar();
 
     return 0;
