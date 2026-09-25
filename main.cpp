@@ -3,189 +3,189 @@
 #include <functional>
 #include <ctime>
 
-#include "Pomocne.h"
-#include "Trening.h"
-#include "IndividualniTrening.h"
-#include "GrupniTrening.h"
-#include "SportskiCentar.h"
+#include "Helpers.h"
+#include "Training.h"
+#include "IndividualTraining.h"
+#include "GroupTraining.h"
+#include "SportsCenter.h"
 
 using namespace std;
 
 /*
-    NTP - INTEGRALNI ISPIT
-    Funkcije nije dozvoljeno mijenjati
+    Personal Project - Sports Center Management
+    Testing main functionality
 */
 
-void TestPomocne()
+void TestHelpers()
 {
-    cout << "\n===== POMOCNE FUNKCIJE =====\n";
+    cout << "\n===== HELPER FUNCTIONS =====\n";
 
-    char* kopija = KreirajKopiju("Napredne tehnike programiranja");
-    cout << "Kopija: " << (kopija ? kopija : "nullptr") << endl;
-    delete[] kopija;
+    char* copy = CreateCopy("Advanced programming techniques");
+    cout << "Copy: " << (copy ? copy : "nullptr") << endl;
+    delete[] copy;
 
-    cout << "Broj rijeci: "
-         << PrebrojiRijeci("  C++   programiranje i OOP  ")
+    cout << "Word count: "
+         << CountWords("  C++   programming and OOP  ")
          << endl;
 
-    char* spojeno = SpojiTekst("FIT", "ZENICA", '-');
-    cout << "Spojeno: " << (spojeno ? spojeno : "nullptr") << endl;
-    delete[] spojeno;
+    char* joined = JoinText("FIT", "ZENICA", '-');
+    cout << "Joined: " << (joined ? joined : "nullptr") << endl;
+    delete[] joined;
 
-    cout << "Jednaki stringovi: " << JesuLiIsti("NTP", "NTP") << endl;
+    cout << "Equal strings: " << AreEqual("NTP", "NTP") << endl;
 
     vector<int> v1{ 1, 2, 3 };
     vector<int> v2{ 1, 2, 3 };
-    cout << "Jednaki vektori: " << (v1 == v2) << endl;
+    cout << "Equal vectors: " << (v1 == v2) << endl;
 
     vector<const char*> s1{ "C++", "OOP" };
     vector<const char*> s2{ "C++", "OOP" };
-    cout << "Jednaki tekstualni vektori: " << JesuLiIsti(s1, s2) << endl;
+    cout << "Equal text vectors: " << AreEqual(s1, s2) << endl;
 }
 
-void TestTrening()
+void TestTraining()
 {
-    cout << "\n===== TRENING =====\n";
+    cout << "\n===== TRAINING =====\n";
 
-    Trening t1("Kondicioni trening", 25.0f, 75);
-    t1.DodajOcjenu(5);
-    t1.DodajOcjenu(4);
-    t1.DodajOcjenu(5);
-    t1.DodajOcjenu(8);
+    Training t1("Conditioning training", 25.0f, 75);
+    t1.AddRating(5);
+    t1.AddRating(4);
+    t1.AddRating(5);
+    t1.AddRating(8);
 
-    t1.Ispis();
+    t1.Print();
 
-    float prosjek = t1.Izracunaj(
-        [](const vector<int>& ocjene) -> float {
-            if (ocjene.empty()) return 0.0f;
-            float suma = 0;
-            for (int x : ocjene) suma += x;
-            return suma / ocjene.size();
+    float average = t1.Calculate(
+        [](const vector<int>& ratings) -> float {
+            if (ratings.empty()) return 0.0f;
+            float sum = 0;
+            for (int x : ratings) sum += x;
+            return sum / ratings.size();
         }
     );
 
-    cout << "Prosjek: " << prosjek << endl;
-    cout << "Dug trening: " << (!t1 ? "DA" : "NE") << endl;
+    cout << "Average: " << average << endl;
+    cout << "Long training: " << (!t1 ? "YES" : "NO") << endl;
 
-    Trening t2(t1);
-    cout << "Copy ctor jednak: " << (t1 == t2) << endl;
+    Training t2(t1);
+    cout << "Copy ctor equal: " << (t1 == t2) << endl;
 
-    Trening t3;
+    Training t3;
     t3 = t1;
-    cout << "Operator= jednak: " << (t1 == t3) << endl;
+    cout << "Operator= equal: " << (t1 == t3) << endl;
 }
 
-void TestIndividualni()
+void TestIndividualTraining()
 {
-    cout << "\n===== INDIVIDUALNI TRENING =====\n";
+    cout << "\n===== INDIVIDUAL TRAINING =====\n";
 
-    IndividualniTrening i1("Individualni fitness", 45.0f, 60, "Amar Trener", 9);
+    IndividualTraining i1("Individual fitness", 45.0f, 60, "Amar Trainer", 9);
 
-    cout << "Prije ++: " << i1.GetBrojTermina() << endl;
+    cout << "Before ++: " << i1.GetSessionCount() << endl;
     ++i1;
-    cout << "Poslije ++: " << i1.GetBrojTermina() << endl;
-    cout << "10 ili vise termina: " << (!i1 ? "DA" : "NE") << endl;
+    cout << "After ++: " << i1.GetSessionCount() << endl;
+    cout << "10 or more sessions: " << (!i1 ? "YES" : "NO") << endl;
 
-    IndividualniTrening i2(i1);
-    cout << "Copy ctor jednak: " << (i1 == i2) << endl;
+    IndividualTraining i2(i1);
+    cout << "Copy ctor equal: " << (i1 == i2) << endl;
 
-    IndividualniTrening i3;
+    IndividualTraining i3;
     i3 = i1;
-    cout << "Operator= jednak: " << (i1 == i3) << endl;
+    cout << "Operator= equal: " << (i1 == i3) << endl;
 
-    i1.Ispis();
+    i1.Print();
 }
 
-void TestGrupni()
+void TestGroupTraining()
 {
-    cout << "\n===== GRUPNI TRENING =====\n";
+    cout << "\n===== GROUP TRAINING =====\n";
 
-    GrupniTrening g1("HIIT grupa", 15.0f, 50, "HIIT", 3);
+    GroupTraining g1("HIIT group", 15.0f, 50, "HIIT", 3);
 
-    cout << "Dodavanje Ena: " << (g1 += "Ena") << endl;
-    cout << "Dodavanje Amar: " << (g1 += "Amar") << endl;
-    cout << "Ponovno Ena: " << (g1 += "Ena") << endl;
-    cout << "Dodavanje Lejla: " << (g1 += "Lejla") << endl;
-    cout << "Dodavanje nakon popunjavanja: " << (g1 += "Tarik") << endl;
+    cout << "Adding Ena: " << (g1 += "Ena") << endl;
+    cout << "Adding Amar: " << (g1 += "Amar") << endl;
+    cout << "Adding Ena again: " << (g1 += "Ena") << endl;
+    cout << "Adding Lejla: " << (g1 += "Lejla") << endl;
+    cout << "Adding after full: " << (g1 += "Tarik") << endl;
 
-    cout << "Popunjen trening: " << (!g1 ? "DA" : "NE") << endl;
+    cout << "Training full: " << (!g1 ? "YES" : "NO") << endl;
 
-    GrupniTrening g2(g1);
-    cout << "Copy ctor jednak: " << (g1 == g2) << endl;
+    GroupTraining g2(g1);
+    cout << "Copy ctor equal: " << (g1 == g2) << endl;
 
-    if (!g1.GetUcesnici().empty() && !g2.GetUcesnici().empty()) {
-        cout << "Deep copy ucesnika: "
-             << (g1.GetUcesnici()[0] != g2.GetUcesnici()[0])
+    if (!g1.GetParticipants().empty() && !g2.GetParticipants().empty()) {
+        cout << "Deep copy of participants: "
+             << (g1.GetParticipants()[0] != g2.GetParticipants()[0])
              << endl;
     }
 
-    GrupniTrening g3;
+    GroupTraining g3;
     g3 = g1;
-    cout << "Operator= jednak: " << (g1 == g3) << endl;
+    cout << "Operator= equal: " << (g1 == g3) << endl;
 
-    g1.Ispis();
+    g1.Print();
 }
-/*
-void TestSportskiCentar()
-{
-    cout << "\n===== SPORTSKI CENTAR =====\n";
 
-    Trening t("Kondicioni trening", 25.0f, 75);
-    IndividualniTrening i("Personalni trening", 50.0f, 60, "Coach A", 12);
-    GrupniTrening g("Pilates", 18.0f, 55, "Pilates", 2);
+void TestSportsCenter()
+{
+    cout << "\n===== SPORTS CENTER =====\n";
+
+    Training t("Conditioning training", 25.0f, 75);
+    IndividualTraining i("Personal training", 50.0f, 60, "Coach A", 12);
+    GroupTraining g("Pilates", 18.0f, 55, "Pilates", 2);
 
     g += "Ena";
     g += "Lejla";
 
-    SportskiCentar centar("Arena Fitness", "info@arena.ba");
+    SportsCenter center("Arena Fitness", "info@arena.ba");
 
-    cout << "Dodaj bazni: " << centar.DodajTrening(t) << endl;
-    cout << "Dodaj individualni: " << centar.DodajTrening(i) << endl;
-    cout << "Dodaj grupni: " << centar.DodajTrening(g) << endl;
+    cout << "Add base training: " << center.AddTraining(t) << endl;
+    cout << "Add individual training: " << center.AddTraining(i) << endl;
+    cout << "Add group training: " << center.AddTraining(g) << endl;
 
-    cout << "\nCentar:\n" << centar << endl;
+    cout << "\nCenter:\n" << center << endl;
 
-    int skupljiOd20 = centar.Prebroji(
-        [](const Trening& trening) {
-            return trening.GetCijena() > 20.0f;
+    int expensiveThan20 = center.Count(
+        [](const Training& training) {
+            return training.GetPrice() > 20.0f;
         }
     );
 
-    cout << "Broj treninga skupljih od 20 KM: " << skupljiOd20 << endl;
+    cout << "Number of trainings more expensive than 20 KM: " << expensiveThan20 << endl;
 
-    Trening* najskuplji = centar.PronadjiNajskuplji();
-    if (najskuplji != nullptr) {
-        cout << "Najskuplji trening: "
-             << najskuplji->GetNaziv()
-             << " (" << najskuplji->GetCijena() << " KM)"
+    Training* mostExpensive = center.FindMostExpensive();
+    if (mostExpensive != nullptr) {
+        cout << "Most expensive training: "
+             << mostExpensive->GetName()
+             << " (" << mostExpensive->GetPrice() << " KM)"
              << endl;
     }
 
-    SportskiCentar kopija(centar);
-    cout << "Copy ctor centra - broj elemenata: " << kopija.GetTrenutno() << endl;
+    SportsCenter copy(center);
+    cout << "Copy ctor of center - element count: " << copy.GetCurrentCount() << endl;
 
-    if (centar.GetTrenutno() > 0 && kopija.GetTrenutno() > 0) {
-        cout << "Deep copy prvog elementa: "
-             << (centar.GetElementAt(0) != kopija.GetElementAt(0))
+    if (center.GetCurrentCount() > 0 && copy.GetCurrentCount() > 0) {
+        cout << "Deep copy of first element: "
+             << (center.GetElementAt(0) != copy.GetElementAt(0))
              << endl;
     }
 
-    SportskiCentar dodjela;
-    dodjela = centar;
-    cout << "Operator= centra - broj elemenata: " << dodjela.GetTrenutno() << endl;
+    SportsCenter assignment;
+    assignment = center;
+    cout << "Operator= of center - element count: " << assignment.GetCurrentCount() << endl;
 }
-*/
+
 int main()
 {
     srand((unsigned)time(nullptr));
-	
-	// Za testiranje odkomentarisati odgovarajucu metodu
     
-	TestPomocne();
-    TestTrening();
-    TestIndividualni();
-    TestGrupni();
-    //TestSportskiCentar();
+    // Uncomment corresponding methods for testing
+    
+    //TestHelpers();
+    //TestTraining();
+    //TestIndividualTraining();
+    //TestGroupTraining();
+    //TestSportsCenter();
 
     return 0;
 }
